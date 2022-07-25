@@ -1,0 +1,42 @@
+\documentclass[landscape,12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{perfect-diagrams}
+\usepackage{fancyvrb}
+\DefineShortVerb{\|}
+\usepackage{parskip}
+\title{\texttt{perfect-diagrams}\\Examples}
+\author{Alan Munn\\Michigan State University}
+\date{2022/07/25}
+
+\begin{document}
+\maketitle
+
+% present perfect
+
+|\presperf{2012}[Sara has lived in Paris twice since 2012]|
+
+\presperf{2012}[Sara has lived in Paris twice since 2012]
+
+|\presperf*{2012}|
+
+\presperf*{2012}
+
+%past perfect
+|\pastperf{2012}{we meet}[Sara had visited Paris twice since we met.]|
+
+\pastperf{2012}{we meet}[Sara had visited Paris twice since we met.]
+
+|\pastperf*{2012}{we meet}|
+
+\pastperf*{2012}{we meet}
+
+
+%future perfect
+|\futperf{Sara is born}{this year}[By this year, Sara will have visited Paris twice.]|
+
+\futperf{Sara is born}{this year}[By this year, Sara will have visited Paris twice.]
+
+|\futperf*{Sara moves\\to Paris}{this year}[By this year, Sara will have lived\\ in Paris for ten years.]|
+
+\futperf*{Sara moves\\to Paris}{this year}[By this year, Sara will have lived\\ in Paris for ten years.]
+\end{document}

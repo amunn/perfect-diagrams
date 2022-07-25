@@ -23,49 +23,81 @@
 %
 \def\@perfversion{1.0}
 \def\@perfdate{2022/07/24}
-\ProvidesPackage{perfect-diagrams}[\@perfdate\ Pre-built syllables using forest v\@perfversion]
+\ProvidesPackage{perfect-diagrams}[\@perfdate\ Perfect timespan diagrams	 v\@perfversion]
 \RequirePackage{tikz}
-\usetikzlibrary{positioning}
+\RequirePackage{array}
+\RequirePackage{varwidth}
+\usetikzlibrary{positioning,decorations.pathmorphing,decorations.pathreplacing}
 \tikzset{perf/.style={
 every node/.style={align=center},
 bar/.style={inner sep=0pt,outer sep=0pt},
 baseline
 }}
-\newcommand\presperf[1]{%
+\NewDocumentCommand{\perfcapformat}{m}{\gdef\@perfcapformat{#1}}
+\newlength{\perfcapsep}
+\setlength{\perfcapsep}{1ex}
+\perfcapformat{\footnotesize\itshape}
+\newenvironment{perfcaption}
+	{\setlength{\topsep}{\perfcapsep}\trivlist\item\relax\centering}
+	{\endtrivlist}
+
+\NewDocumentCommand{\presperf}{s m O{}}{
+\begin{varwidth}{\linewidth}
 \begin{tikzpicture}[perf]
 \node[bar](LB) at (0,0) {|};
 \node[bar](RB) at (4.5,0) {|};
-\draw[dashed] (LB) -- node[below=8pt] {PTS} node[above,near end] {X} node[near start,above] {X}  (RB);
-\node[above=3pt of LB]{LB};
-\node[above=3pt of RB]{RB};
-\node[below=3pt of LB]{#1};
+\coordinate (C) at (2.25,0);
+\IfBooleanTF{#1}
+	{\draw[dashed] (LB) -- node[below] {PTS} node[above,midway] {X}  (RB);}
+	{\draw[dashed] (LB) -- node[below] {PTS} node[above,near end] {X} node[near start,above] {X}  (RB);}
+\node[above=3pt of LB](lb){LB};
+\node[above=3pt of RB](rb){RB};
+\node[below=3pt of LB]{#2};
 \node[below=3pt of RB]{UT};
+\IfBooleanTF{#1}{\draw[decorate,decoration=brace](lb) -- (rb);}{}
 \end{tikzpicture}
+\IfNoValueTF{#3}{}{\begin{perfcaption}\@perfcapformat {#3}\end{perfcaption}}
+\end{varwidth}
 }
-\newcommand\pastperf[2]{%
+\NewDocumentCommand{\pastperf}{s m m O{}}{%
+\begin{varwidth}{\linewidth}
 \begin{tikzpicture}[perf]
 \node[bar](LB) at (0,0) {|};
 \node[bar](RB) at (3,0) {|};
 \node[bar](UT) at (4.5,0) {|};
-\draw[dashed] (LB) -- node[below=8pt,pos=.3] {PTS} node[above,pos=.45] {X} node[near start,above] {X}  (UT);
-\node[above=3pt of LB]{LB};
-\node[above=3pt of RB]{RB};
-\node[below=3pt of LB]{#1};
-\node[below=3pt of RB]{#2};
+\coordinate (C) at (2.25,0);
+\IfBooleanTF{#1}
+	{\draw[dashed] (LB) -- node[below,pos=.3] {PTS} node[above,pos=.3] {X}  (UT);}
+	{\draw[dashed] (LB) -- node[below,pos=.3] {PTS} node[above,pos=.45] {X} node[near start,above] {X}  (UT);}
+\node[above=3pt of LB](lb){LB};
+\node[above=3pt of RB](rb){RB};
+\node[below=3pt of LB]{#2};
+\node[below=3pt of RB]{#3};
 \node[below=3pt of UT]{UT};
+\IfBooleanTF{#1}{\draw[decorate,decoration=brace](lb) -- (rb);}{}
 \end{tikzpicture}
+\IfNoValueTF{#4}{}{\begin{perfcaption}\@perfcapformat {#4}\end{perfcaption}}
+\end{varwidth}
 }
-\newcommand\futperf[2]{%
+\NewDocumentCommand{\futperf}{s m m O{}}{%
+\begin{varwidth}{\linewidth}
 \begin{tikzpicture}[perf]
 \node[bar](LB) at (0,0) {|};
 \node[bar](RB) at (4.5,0) {|};
 \node[bar](UT) at (3,0) {|};
-\draw[dashed] (LB) -- node[below=8pt,pos=.4] {PTS} node[above,near end] {X} node[near start,above] {X}  (RB);
-\node[above=3pt of LB]{LB};
-\node[above=3pt of RB]{RB};
-\node[below=3pt of LB]{#1};
-\node[below=3pt of RB]{#2};
+\coordinate (C) at (2.25,0);
+\IfBooleanTF{#1}
+	{\draw[dashed] (LB) -- node[below,pos=.4] {PTS} node[above,midway] {X}  (RB);}
+	{\draw[dashed] (LB) -- node[below,pos=.4] {PTS} node[above,near end] {X} node[near start,above] {X}  (RB);}
+\node[above=3pt of LB](lb){LB};
+\node[above=3pt of RB](rb){RB};
+\node[below=3pt of LB]{#2};
+\node[below=3pt of RB]{#3};
 \node[below=3pt of UT]{UT};
+\IfBooleanTF{#1}{\draw[decorate,decoration=brace](lb) -- (rb);}{}
 \end{tikzpicture}
+\IfNoValueTF{#4}{}{\begin{perfcaption}\@perfcapformat {#4}\end{perfcaption}}
+\end{varwidth}
 }
+
 \endinput
