@@ -42,7 +42,7 @@ baseline
 	{\endtrivlist}
 
 \NewDocumentCommand{\presperf}{s m O{}}{
-\begin{varwidth}{\linewidth}
+\begin{varwidth}[t]{\linewidth}
 \begin{tikzpicture}[perf]
 \node[bar](LB) at (0,0) {|};
 \node[bar](RB) at (4.5,0) {|};
@@ -60,7 +60,7 @@ baseline
 \end{varwidth}
 }
 \NewDocumentCommand{\pastperf}{s m m O{}}{%
-\begin{varwidth}{\linewidth}
+\begin{varwidth}[t]{\linewidth}
 \begin{tikzpicture}[perf]
 \node[bar](LB) at (0,0) {|};
 \node[bar](RB) at (3,0) {|};
@@ -80,7 +80,7 @@ baseline
 \end{varwidth}
 }
 \NewDocumentCommand{\futperf}{s m m O{}}{%
-\begin{varwidth}{\linewidth}
+\begin{varwidth}[t]{\linewidth}
 \begin{tikzpicture}[perf]
 \node[bar](LB) at (0,0) {|};
 \node[bar](RB) at (4.5,0) {|};
